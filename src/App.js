@@ -41,8 +41,7 @@ class App extends Component{
             <Route path="/Template">
               <ListTemplate />
             </Route>
-            <Route path="/week/:id" Component ={Week}>
-              
+            <Route path="/week/:id" component={Week}>                          
             </Route> 
             <Route
               path="/greeting/:id"

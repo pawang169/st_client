@@ -11,10 +11,18 @@ class Week extends Component {
  
     render(){
         debugger;
+        let styles = {
+            margin: '20px',
+            width: '100%',
+            height: '100%',
+            align: "center",
+            backgroundColor: '#9aeaea',
+          };
             const { text, match: { params } } = this.props;
             const { id } = params;
             console.log("match " + this.props)
             let sectionData = [
+                                {speaker:'',heading:'Welcome',sectionType:'div'},
                                 {speaker:'pawan1',heading:'h1',sectionType:'div'},
                                 {speaker:'pawan2',heading:'h2',sectionType:'vid',videoStart:10,videoEnd:20,videoURL:'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'},
                                 {speaker:'pawan3',heading:'h3',sectionType:'div'},
@@ -22,7 +30,7 @@ class Week extends Component {
                             ];
             let cntrl = "";
             if(sectionData[this.state.count].sectionType=="div")  {
-                    cntrl = <Slidediv   id={this.state.count} 
+                    cntrl = <Slidediv divStyle={styles}  id={this.state.count} 
                     speaker={sectionData[this.state.count].speaker} 
                     heading={sectionData[this.state.count].heading} />    
             }                
