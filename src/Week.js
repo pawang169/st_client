@@ -34,11 +34,12 @@ class Week extends Component {
     render(){
         let cntrl = "";
         let styles = {
-            margin: '20px',
-            width: '100%',
-            height: '100%',
-            align: "center",
-            backgroundColor: '#9aeaea',
+                display: "block",
+                width: "100%",
+                height: "800px",
+                padding: "5px",
+                border: "1px solid blue",
+                "text-align": "center"
           };
           
             let sectionData = this.state.data.find(rec=> {
@@ -53,7 +54,7 @@ class Week extends Component {
                             let vUrl = rec.videoURL;
                             if(rec.videoStart+rec.videoEnd>0)
                                 vUrl = rec.videoURL + "#t=" + rec.videoStart + ',' + rec.videoEnd;
-                            cntrl = <Videodiv   id={this.state.count} 
+                            cntrl = <Videodiv style={styles} id={this.state.count} 
                             videoURL={vUrl} 
                             />
                         }
@@ -62,7 +63,7 @@ class Week extends Component {
             });
          
         return (
-        <div id="mainDiv" >
+        <div id="mainDiv">
                   
             {/* <h1>Slide Number : {this.state.count}</h1>             */}
             <button id="btn" onClick={()=>{this.countChange()}}>Next Slide</button> 

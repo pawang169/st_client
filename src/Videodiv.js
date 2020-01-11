@@ -10,8 +10,8 @@ class Videodiv extends Component
     render()
     {
         return(
-            <div>
-                <video width="90%" controls>
+            <div style={this.props.style}>
+                <video width="100%"  height="95%" controls>
                     <source src={this.props.videoURL} type="video/mp4" />
                 </video>             
             </div>
