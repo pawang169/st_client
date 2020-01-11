@@ -14,18 +14,16 @@ class App extends Component{
   {
     return (
       <Router>
-        <div> Menu
-          <ul>
-            <li>
-              <Link to="/"></Link>
-            </li>
-            <li>
-              <Link to="/Template">List Templates</Link>
-            </li>
-             
-          </ul>
-  
-          <hr />
+      <div> 
+        <nav>
+          <div className="nav-wrapper">
+          <a href="/" className="brand-logo">SOS</a>
+            <ul id="nav-mobile" className="right hide-on-med-and-down">
+              <li><Link to="/Template">List Templates</Link></li>
+           
+            </ul>
+          </div>
+        </nav>
   
           {/*
             A <Switch> looks through all its children <Route>
@@ -49,10 +47,12 @@ class App extends Component{
               // render={props => <Greeting text="Hello, " {...props} />}
               />
           </Switch>
-        </div>
+      </div>
       </Router>
     );
   }
 }
 
 export default App;
+
+

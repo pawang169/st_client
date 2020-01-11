@@ -7,7 +7,14 @@ class Week extends Component {
         data:[]
     }
      countChange(){ 
-         this.setState({ count: this.state.count + 1 }) 
+         console.log(this.state.count + ">" + this.state.data.length)
+         if(this.state.count>=this.state.data.length-1){
+            console.log("reset")
+            this.setState({ count: 0 })     
+         }
+            
+         else
+            this.setState({ count: this.state.count + 1 }) 
     }
     
     componentDidMount(){
@@ -25,6 +32,7 @@ class Week extends Component {
         })
     }
     render(){
+        let cntrl = "";
         let styles = {
             margin: '20px',
             width: '100%',
@@ -32,46 +40,37 @@ class Week extends Component {
             align: "center",
             backgroundColor: '#9aeaea',
           };
-            // const { text, match: { params } } = this.props;
-            // const { id } = params;
-            // console.log("match " + this.props)
-            // let sectionData = [
-            //                     {speaker:'',heading:'Welcome',sectionType:'div'},
-            //                     {speaker:'pawan1',heading:'h1',sectionType:'div'},
-            //                     {speaker:'pawan2',heading:'h2',sectionType:'vid',videoStart:10,videoEnd:20,videoURL:'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'},
-            //                     {speaker:'pawan3',heading:'h3',sectionType:'div'},
-            //                     {speaker:'pawan4',heading:'h4',sectionType:'vid',videoStart:0,videoEnd:0,videoURL:'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4'},
-            //                 ];
+          
             let sectionData = this.state.data.find(rec=> {
                 console.log(rec.sectionId);
-                if (rec.sectionId==this.state.count+1) 
-                    return rec;
+                if (rec.sectionId==this.state.count+1) {
+                    if(rec.sectionType=="div")  {
+                            cntrl = <Slidediv divStyle={styles}  id={this.state.count} 
+                            speaker={rec.speaker} 
+                            heading={rec.heading} />    
+                    }                
+                    else{
+                            let vUrl = rec.videoURL;
+                            if(rec.videoStart+rec.videoEnd>0)
+                                vUrl = rec.videoURL + "#t=" + rec.videoStart + ',' + rec.videoEnd;
+                            cntrl = <Videodiv   id={this.state.count} 
+                            videoURL={vUrl} 
+                            />
+                        }
+                }
+                    console.log("rec value : "+  rec.toString() );
             });
-            console.log(sectionData.sectionType)
-            // let rec = sectionData[0];
-          //  console.log("sectionData" + "Count " +this.state.count + " value " +  sectionData.speaker );
-            let cntrl = "";
-            // if(sectionData[this.state.count].sectionType=="div")  {
-            //         cntrl = <Slidediv divStyle={styles}  id={this.state.count} 
-            //         speaker={sectionData[this.state.count].speaker} 
-            //         heading={sectionData[this.state.count].heading} />    
-            // }                
-            // else{
-            //         let vUrl = sectionData[this.state.count].videoURL;
-            //         if(sectionData[this.state.count].videoStart+sectionData[this.state.count].videoEnd>0)
-            //             vUrl = sectionData[this.state.count].videoURL + "#t=" + sectionData[this.state.count].videoStart + ',' + sectionData[this.state.count].videoEnd;
-            //         cntrl = <Videodiv   id={this.state.count} 
-            //         videoURL={vUrl} 
-            //         />
-            //     }
-
+         
         return (
         <div id="mainDiv" >
-            <button id="btn" onClick={()=>{this.countChange()}}>Click Me</button>        
-            <h1>Slide Number : {this.state.count}</h1>
+                  
+            {/* <h1>Slide Number : {this.state.count}</h1>             */}
+            <button id="btn" onClick={()=>{this.countChange()}}>Next Slide</button> 
+            <hr />
+            {cntrl}  
             
-            {/* {cntrl}          */}
-              Hello      
+            
+              
         </div>
         )
         
@@ -79,3 +78,6 @@ class Week extends Component {
 
 }
 export default Week;
+
+
+

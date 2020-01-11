@@ -23,18 +23,40 @@ class ListTemplate extends Component{
     }
 
     render(){ 
+        const gotRecords = this.state.data.length >0 ? true:false;
+        let screenRender = <h1 className="center-align">No record found !!</h1>
+        if(gotRecords)
+        {
+           screenRender= <div>
+                            <h4 className="collection-header">Weekly Themes for Year 2020</h4>   
+                            <table className="highlight">
+                                <thead>
+                                <tr>
+                                    <th>Week</th>
+                                    <th>Theme</th>      
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                {this.state.data.map(rec => {
+                                 let a = "/week/" + rec.templateId;                        
+                                 return (
+                                        <tr key={rec.templateId}>
+                                            <td>{rec.templateName}</td>
+                                            <td><Link  to={a} >{rec.templateTitle}</Link></td>    
+                                        </tr> 
+                                        )
+                                })}
+                                </tbody>
+                            </table>
+                        </div>
+        } 
+
         return(
-                <div>
-                    <h1> List of data </h1>
-                     {this.state.data.map(rec => {
-                         let a = "/week/" + rec.templateId;                        
-                        return (
-                                <li key={rec.templateId}><Link  to={a} >{rec.templateName} Title {rec.templateTitle}</Link></li>               
-                            )
-                     })}
-                </div>);
+                    <div>
+                        {screenRender}
+                    </div>);
     }
 
 }
-
-export default ListTemplate;
+export default ListTemplate; 
